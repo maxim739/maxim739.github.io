@@ -1,0 +1,12 @@
+= Maxim DeJong's Project Portfolio
+:sectnums:
+:toc: left
+:toclevels: 3
+
+:toc!:
+
+This portfolio is under constant maintinence, as I am always working on something new.
+
+Feel free to scroll through and find out more about them! 
+
+include::01-CollegeProj.adoc
