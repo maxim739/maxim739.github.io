@@ -1,0 +1,7 @@
+== My College Projects
+
+I have completed these either for my studies at McGill, or alongside them as personal projects!
+
+include::01-1-Personal.adoc[]
+
+include::01-2-School.adoc[]
