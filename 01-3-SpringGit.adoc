@@ -1,0 +1,143 @@
+=== Spring Boot Projects and GitHub Project Management 
+
+This section touches on the use of Spring Initializer and explores the GitHub Project interface.
+
+==== Spring Boot Project Initialization
+
+Spring Boot is an open source framework for creating stand-alone Java-based applications. This is accomplished through the Spring Framework, which provides developers a comprehensive programming and configuration model for their Java applications. 
+
+We will return to the details of Spring later. For now, our only concern is setting it up.
+
+. Navigate to the link:https://start.spring.io/[Spring Initializer] 
+
+. Use the following settings to generate a spring project:
++
+image::figs/SpringInit.PNG[Spring Initialization Settings] 
++
+[NOTE]
+Don't forget to add the proper dependencies. 
+
+. Click *Generate* and extract the contents of the zip folder to a location where you can find it later. 
+
+==== Application Project Setup
+
+. Create a new repository under your account on GitHub for an example application that we are going to develop throughout the semester. Name the repository *eventregistration*. See more on the specification of the application functionality later. 
++
+image::figs/eventregistration-repo.png[Event Registration Repo]
+
+
+. Clone it somewhere on your disk. We assume you cloned it to _~/git/eventregistration_.
+
+. Move the downloaded Spring project folder into the _~/git/eventregistration_ folder.
+
+. Locate the _EventRegistration-Backend_ folder.
+
+. For future use, locate the _application.properties_ file in the _src/resources_ folder and add the following content: 
++
+```
+server.port=${PORT:8080}
+
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults = false
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
+```
++
+[NOTE]
+Source: https://vkuzel.com/spring-boot-jpa-hibernate-atomikos-postgresql-exception
+
+. Locate the Java file containing the main application class (`EventRegistrationApplication.java`) and add the following content
++
+[source,java]
+----
+package ca.mcgill.ecse321.eventregistration;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RestController
+@SpringBootApplication
+public class EventRegistrationBackendApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(EventRegistrationBackendApplication.class, args);
+  }
+
+  @RequestMapping("/")
+  public String greeting(){
+    return "Hello world!";
+  }
+  	
+}
+----
+
+. Verify that it builds by running `gradle build -xtest` in the root directory of the backend project (i.e. _~/git/eventregistration/EventRegistration-Backend_). 
+
+. Commit and push the files of the new Spring project.
+
+[source,bash]
+----
+git add .
+git status #verify the files that are staged for commit
+git commit -m "Initial commit of the backend application"
+git push
+----
+
+==== GitHub Project Repository
+
+One of the core components of Agile development is being able to manage the development problem space. GitHub projects extends GitHub's utility to make problem space management easy. 
+
+Any repository can be added to a project by selecting the _Create New Project_ button located in the _Project_ tab of the repository. 
+
+image::figs/GitProj5.png[]
+
+Below is the layout of the Basic KanBan Board.
+
+image::figs/GitProj6.png[]
+
+By default there are three columns: *To do*, *In progress* and *Done*. More columns can be added by clicking the add column area. 
+
+Issues that exist already on the GitHub issue board can be searched by filter, then dragged and dropped into the board space. This is done by clicking _Add cards_ at the top right corner. 
+
+image::figs/GitProj7.PNG[GitHub project cards]
+
+It is generally prudent as a software engineer to automate away tedious tasks. You only need to automate it once. You can select various automation actions by clicking the ellipsis (...) at the top right corner of each board. 
+
+image::figs/GitProj8.PNG[GitHub project automation]
+
+That way when you create an issue on the issue board, close an issue etc. it is automatically added to the proper column. 
+
+image::figs/GitProj9.PNG[GitHub project automation result]
+
+To help with better management of the project as you move through project phases, it is prudent to add Milestones. A new milestone can be created by selecting the _Issues_ tab in the repository, and selecting the _Milestones_ tab located next to the _New issue_ button. 
+
+image::figs/GitProj10.PNG[GitHub project milestone creation]
+
+To create a new milestone, select the _New Milestone_ button. Then, fill out the form with an appropriate name, due date and description. Once your milestone has been created, you can attach issues to the milestone and see their progress by selecting the _Milestones_ tab.
+
+image::figs/GitProj11.PNG[GitHub project milestone creation button]
+To help with better management of the project as you move through project phases, it is prudent to add Milestones. A new milestone can be created by selecting the _Issues_ tab in the repository, and selecting the _Milestones_ tab located next to the _New issue_ button. 
+
+image::figs/GitProj10.PNG[GitHub project milestone creation]
+
+To create a new milestone, select the _New Milestone_ button. Then, fill out the form with an appropriate name, due date and description. Once your milestone has been created, you can attach issues to the milestone and see their progress by selecting the _Milestones_ tab.
+
+image::figs/GitProj11.PNG[GitHub project milestone creation button]
+
+image::figs/GitProj12.PNG[GitHub project milestone tracking]
+
+Finally, you can create issues to track. This is very straight forward, (select _New issue_ button under the _Issues_ tab of the repository), so the rest of this section will deal with some best practices when tracking issues in this course.
+
+When creating a new issue it is imperative to be concise but also as descriptive as possible. All the issues you create should have a title, with a comment to describe the issue in detail. 
+
+All issues at the time of creation should be assigned to someone. You can always change this later. Label your issues. If none of the default labels fit, new labels can be created to meet your need. This is accomplished by selecting the _Labels_ tab next to the _Milestones_ tab under the _Issues_ section. Then click the _New Label_ button. Finally, assign your issue to the appropriate milestone and project. +
+
+image::figs/GitProj13.PNG[GitHub project issue creation]
+
+For the purpose of tracking progress through the project, never ever ever delete issues. Issues should be closed and reopened as needed but never deleted. Even if a mistake was made during creation of an issue, issues can be edited by their creator.
+
+image::figs/GitProj14.PNG[GitHub project issue creation]
+
+If you've set everything up correctly. Your issue board should match your KanBan board. The KanBan board should be a snapshot of how the project is going. Nothing should be done manually here. All the manual labor of opening, moving and triaging issues should be done on the issue board. 
+
+image::figs/GitProj15.PNG[GitHub project issue creation]

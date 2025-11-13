@@ -1,0 +1,53 @@
+=== A Quick Lesson In Debugging
+
+Before moving on the the subsequent step it is necessary to ensure that the Event Registration project builds locally, on GitHub and on Heroku. Without this, we cannot continue building the project. 
+
+==== Debugging Flow 
+
+The general flow for debugging can be seen in the image below.
+
+image::figs/debug.PNG[]
+
+When addressing an error/bug during a build process, building locally takes precedence for several reasons, the most important of which is mitigating error/bug propagation to others working on the same branch within the same project. In addition to this, it's easier to access debugging logs locally than remotely on GitHub or Heroku, especially when an internet connection is unreliable. 
+
+The process then propagates to committing and pushing the changes to GitHub, checking that GitHub Actions successfully builds. If the build fails, it is possible to check the workflow log to see why. To gain more insight if the details are not enough, link:https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging[additional debug logging] can be enabled.
+
+image::figs/Details.PNG[]
+
+Finally, the project is deployed to Heroku. The same general process used for GitHub Actions can be used for Heroku. Heroku build logs can be seen when executing: +
+
+[source, bash]
+----
+git push backend-heroku main
+----
+
+image::figs/HerokuFail.PNG[]
+
+or through the web interface under the Overview tab: 
+
+image::figs/HerokuLog.PNG[]
+
+A live demonstration of this process will be given in your tutorial section.
+
+The *_suggested potential_* fixes implemented to allow the Event Registration Project to build locally, on GitHub and Heroku are as follows (follow the debugging flowchart after each step):
+
+* Ensure that the package names are identical in *_EventRegistrationBackendApplication.java_* and *_EventRegistrationBackendApplicationTests.java_*. The former is located in _src>main>java_ and the latter in _src>test>java_ directory.
+
+* Comment out the highlighted lines (including line 9 containing the @Test annotation) in the *_EventRegistrationBackendApplicationTests.java_* file (they will be reactivated later):
+
+image::figs/commentsTest.PNG[]
+
+* Modify the _settings.gradle_ file at the root of the project to match the following (The value for the _rootProject.name_ property should match the name of your root directory): +
+[source, gradle]
+----
+rootProject.name = 'eventregistration'
+include 'EventRegistration-Backend'
+----
+
+* Add a file named _system.properties_ to the root directory of your repository, and then update it with the following content (to maintain cohesion and smoothness in development, the _java.runtime.version_ property should be the Heroku supported version closest to the version you have installed):
+[source,gradle]
+----
+java.runtime.version=17
+----
+
+In the event that there are version discrepencies between members of a group, it could help designate one person to be responsible for deploying the application on Heroku. 

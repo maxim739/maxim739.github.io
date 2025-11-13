@@ -1,0 +1,22 @@
+=== Git
+
+For our purposes, git is a software tool for tracking changes across application code files and for coordinating work between various programmers working on the same application source code during the application's development and life cycle.
+
+Glossary -- Part 1: 
+
+ * *Git* is your version control software
+ * *GitHub* hosts your repositories
+ * A *repository* is a collection of files and their history
+ * A *commit* is a saved state of the repository
+
+Glossary -- Part 2: 
+
+* *Working Directory*: files being worked on right now
+* *Staging area*: files ready to be committed
+* *Repository*: A collection of commits
+
+The main git workflow is as follows:
+
+image:figs/git-remote.png[] 
+
+Install the Git version control system (VCS) from https://git-scm.com/downloads.

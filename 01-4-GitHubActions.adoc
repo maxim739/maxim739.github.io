@@ -1,0 +1,62 @@
+=== GitHub Actions for Continuous Integration
+
+Conitnuous integration (CI) is at the core of Agile development. The act of writing, testing and integrating incremental amounts of code often serves to detect errors, bugs and integration pain points sooner. 
+
+==== Setup CI Workflow and Template
+
+. Go to your repository and select _Actions_ in the repository menu tab. 
+
+. Select _set up a workflow yourself_ linked just below the title.
+image::figs/githubactions1.png[]
+
+. Modify the contents of the main.yml to have the following content:
+
+[source, yml]
+----
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  build:
+
+    runs-on: Windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 16
+      uses: actions/setup-java@v2
+      with:
+        java-version: '16'
+        distribution: 'adopt'
+        cache: gradle
+    - name: Validate Gradle wrapper
+      uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      working-directory: EventRegistration-Backend
+    - name: Build with Gradle
+      run: ./gradlew build
+      working-directory: EventRegistration-Backend
+----
+
+[NOTE]
+The configurations in this YML file are used to determine the environment in which to run the specified GitHub action. Though not required, you will want these configurations to mirror the system you're developing on if you implement build actions for the branches you are solely responsible for to make debugging errors easier. On branches with multiple developers, use configurations that have as much commonality as possible.
+
+All that's left to do is test to make sure it works. Go to local working copy of your repository and initiate a fetch, add, commit, status and push command in that order. 
+
+The result of workflow runs can be seen under the _Actions_ tab of the repository.
+
+image::figs/GitProj2.png[Results of workflow run]
+
+To gain more insight into a workflow run, select the workflow run from the list . Even more insight can be gleaned from independent jobs by selecting them from the list of jjobs as well.
+
+image::figs/GitProj3.png[Workflow run detail]
+
+image::figs/GitProj4.png[Job details]
+
+*DEBUGGING EXERCISE:* _Why did the build fail? How would you fix it?_
