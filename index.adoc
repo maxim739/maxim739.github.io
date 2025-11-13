@@ -10,3 +10,4 @@ This portfolio is under constant maintinence, as I am always working on somethin
 Feel free to scroll through and find out more about them! 
 
 include::01-CollegeProj.adoc
+
