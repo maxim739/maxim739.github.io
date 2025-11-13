@@ -1,0 +1,7 @@
+=== Personal Projects from fall 2023 to Present
+
+I could put many subprojects here or whatever
+
+and even include images using 'image:figs/git-remote.png[]'
+
+as long there is an image at that path with that name
