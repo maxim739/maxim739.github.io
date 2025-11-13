@@ -1,30 +1,71 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Maxim DeJong's Project Portfolio</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { color: #333; }
-        h3 { color: #555; }
-        img { display: block; margin: 10px 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maxim DeJong's Project Portfolio</title>
+  style.css
+  <!-- Load Asciidoctor.js -->
+  https://cdn.jsdelivr.net/npm/@asciidoctor/core/dist/browser/asciidoctor.min.js</script>
 </head>
 <body>
+  <header>
     <h1>Maxim DeJong's Project Portfolio</h1>
-    <p><em>This portfolio is under constant maintenance, as I am always working on something new.</em></p>
-    <p>Feel free to scroll through and find out more about them!</p>
-    <hr>
-    <h3>Personal Projects from fall 2023 to Present</h3>
-    <div class="project-card">
-  <h3>Tank Project</h3>
-  <p>A robotics project featuring a tracked vehicle with remote control and camera integration.</p>
-  <a href="tankProject.htmlils</a>
-</div>
-<p>I could put many subprojects here or whatever</p>
-<p>and even include images using:</p>
-<img src='figs/git-remote.png' alt='Git Remote Image' style='max-width:100%; height:auto;'>
-<p>as long there is an image at that path with that name</p>
+    <nav class="top-nav">
+      #Home</a>
+      #College Projects</a>
+      #Personal Projects</a>
+      #School Projects</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside id="toc">
+      <h2>Table of Contents</h2>
+      <ul id="toc-list"></ul>
+    </aside>
+
+    <main id="content">
+      <p>Select a section from the navigation menu to load its content.</p>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Maxim DeJong</p>
+  </footer>
+
+  <script>
+    const asciidoctor = Asciidoctor();
+
+    function loadAdoc(file) {
+      fetch(file)
+        .then(response => {
+          if (!response.ok) throw new Error('File not found: ' + file);
+          return response.text();
+        })
+        .then(data => {
+          const html = asciidoctor.convert(data);
+          document.getElementById('content').innerHTML = html;
+          generateTOC();
+        })
+        .catch(error => {
+          document.getElementById('content').innerHTML = `<p style="color:red;">${error.message}</p>`;
+        });
+    }
+
+    function generateTOC() {
+      const content = document.getElementById('content');
+      const headings = content.querySelectorAll('h1, h2, h3');
+      const tocList = document.getElementById('toc-list');
+      tocList.innerHTML = '';
+      headings.forEach((heading, index) => {
+        const id = 'section-' + index;
+        heading.id = id;
+        const li = document.createElement('li');
+        li.innerHTML = `#${id}${heading.textContent}</a>`;
+        tocList.appendChild(li);
+      });
+    }
+  </script>
 </body>
 </html>
