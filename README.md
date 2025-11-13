@@ -12,4 +12,10 @@ I also have included some of my artistic pursuits:
 * Leather making
 * Wood carving/ Whittling
 
-The notes are contiuously published at: https://mcgill-ecse321-winter2022.github.io/
+
+To run asciidoc:
+
+* Create master index.adoc that includes all of the other files
+* asciidoctor index.adoc -o index.html
+	* If you want a style create a style.css and: asciidoctor -a stylesheet=style.css index.adoc -o index.html
+* Then just add and push

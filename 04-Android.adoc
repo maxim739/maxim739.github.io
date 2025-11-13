@@ -1,9 +1,0 @@
-== Android 
-
-include::04-1-CreateAndroidProject.adoc[]
-
-include::04-2-DevelopAndroid1.adoc[]
-
-include::04-3-RunVirtualDevice.adoc[]
-
-include::04-4-DevelopAndroid2.adoc[]
