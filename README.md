@@ -1,6 +1,15 @@
-# mcgill-ecse321-winter2022.github.io
-Tutorial notes.
+# Maxim DeJong's Project Portfolio
 
-These tutorial notes are for the winter 2022 session of ECSE 321: Introduction to Software Engineering.
+The notes are contiuously published at: https://maxim739.github.io/
 
-The notes are continuously published at: https://mcgill-ecse321-winter2022.github.io/
+Projects showcased are:
+* 3D-Printed Tank
+* Jetson Nano Object Detection
+* Arduino Projects
+
+I also have included some of my artistic pursuits:
+* Embriodery
+* Leather making
+* Wood carving/ Whittling
+
+The notes are contiuously published at: https://mcgill-ecse321-winter2022.github.io/
