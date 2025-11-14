@@ -1,2 +1,3 @@
-# Here are my projects I have completed during my time at McGill
-They are split between school projects, and personal projects outside of school.
+== Projects COmpleted During McGill Education
+
+include::ClassProjects.adoc[]
